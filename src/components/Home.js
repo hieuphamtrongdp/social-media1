@@ -11,7 +11,7 @@ import { Form } from 'react-bootstrap'
 import { FormControl } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import Post_Layout from '../components/post'
-
+import Overview from '../components/Overview'
 
 class Home extends Component {
 
@@ -78,77 +78,14 @@ class Home extends Component {
                 <div className="container-fluid">
                     <div className="row profile">
                         <div className="col-md-3">
-                            <div className="profile-sidebar">
-
-                                <div className="profile-userpic">
-
-                                    <img src={photoURL} onClick={() => { this.upload.click() }} className="img-responsive" alt="" />
-
-                                </div>
-
-                                <input ref={(ref) => this.upload = ref} style={{ display: "none" }} type="file" name="avatar" id="avatar"
-                                    onChange={e => this._handleChangeFile(e)}
-                                />
-
-
-                                <div className="profile-usertitle">
-                                    <div className="profile-usertitle-name">
-                                        {this.props.user.username.fullname}
-                                    </div>
-                                    <div className="profile-usertitle-job">
-                                        Developer
-                                </div>
-                                </div>
-
-                                <div className="profile-userbuttons">
-                                    <button onClick={e => this._handleSubmit(e)} name="submit" style={{ backgroundColor: "#d9534f" }} type="button" className="btn btn-success btn-sm">Change Avatar</button>
-                                    <button style={{ backgroundColor: "#5cb85c" }} type="button" className="btn btn-danger btn-sm">Message</button>
-                                </div>
-
-                                <div className="profile-usermenu">
-                                    <ul className="nav">
-                                        <li className="active">
-                                            <Link>
-                                                <i className="glyphicon glyphicon-home" />
-                                                Overview
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link>
-                                                <i className="glyphicon glyphicon-phone" />
-                                                {this.props.user.infoUser.phone}
-                                            </Link>
-
-                                        </li>
-                                        <li>
-                                            <Link>
-                                                <i className="glyphicon glyphicon-heart-empty" />
-                                                {this.props.user.infoUser.birthday}
-                                            </Link>
-                                        </li>
-
-                                        <li>
-                                            <Link to="/update_info">
-                                                <i className="glyphicon glyphicon-cog" />
-                                                <strong>Update Profile</strong>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/update_password">
-                                                <i className="glyphicon glyphicon-cog" />
-                                                <strong>Update Password</strong>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
+                            <Overview/>
+                            
                         </div>
+
                         <div className="col-md-6">
-                            
                                 <Post_Layout/>
-                            
                         </div>
+
                         <div className="col-md-3">
                             <div className="profile-content">
                                 Some user related content goes here...

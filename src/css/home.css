@@ -23,6 +23,9 @@ body {
  .ul-style .btn_logout{
    background-color: #6c757d;
  }
+ ul li {
+   list-style-type: none;
+ }
  #search-user{
      
      margin-right: auto;
@@ -34,9 +37,6 @@ body {
     color: white;
     transition: color 0.5s;
 }
-
-
-  
   /* Profile container */
   .profile {
     margin: 20px 0;
@@ -44,11 +44,12 @@ body {
   
   /* Profile sidebar */
   .profile-sidebar {
-    padding: 20px 0 10px 0;
+    padding: 20px 0 1px 0;
     background: #fff;
   }
   
   .profile-userpic img {
+    display: flex;
     float: none;
     margin: 0 auto;
     width: 50%;
@@ -57,7 +58,10 @@ body {
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
   }
-  
+  .img-fluid {
+    max-width: 50%;
+
+  }
   .profile-usertitle {
     text-align: center;
     margin-top: 20px;
@@ -87,7 +91,6 @@ body {
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 600;
-    padding: 6px 15px;
     margin-right: 5px;
   }
   
@@ -101,6 +104,7 @@ body {
   
   .profile-usermenu ul li {
     border-bottom: 1px solid #f0f4f7;
+    padding: 8px 15px;
   }
   
   .profile-usermenu ul li:last-child {
@@ -125,13 +129,15 @@ body {
   
   .profile-usermenu ul li.active {
     border-bottom: none;
+    background-color: #F6F9FB;
+    border-left: 2px solid #5b9bd1;
   }
   
   .profile-usermenu ul li.active a {
     color: #5b9bd1;
-    background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
-    margin-left: -2px;
+  }
+  .profile-usermenu ul li i.disabled {
+    padding-left: 20px;
   }
   
   /* Profile Content */

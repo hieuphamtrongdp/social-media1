@@ -1,0 +1,13 @@
+defaultEntryPoints = ["http"]
+logLevel = "INFO"
+
+sendAnonymousUsage = true
+
+## Dynamic configuration
+[http.services]
+  [http.services.my-service.loadBalancer]
+
+    [[http.services.my-service.loadBalancer.servers]]
+      url = "http://172.127.0.1:8001/"
+    [[http.services.my-service.loadBalancer.servers]]
+      url = "http://172.127.0.2:8002/"
