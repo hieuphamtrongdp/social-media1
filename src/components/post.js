@@ -102,6 +102,14 @@ class Post_Layout extends Component {
                                                 <span>Avatar</span>
                                             </div>
                                             <Link className="status-editing">{item.author}</Link>
+                                            <div className="wrap">
+                                                <Link to='/#'>
+                                                    <div
+                                                    style={{height:'50'}}
+                                                     className="badge badge-pill badge-info">#{item.hashtag}</div>
+                                                </Link>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div className="col-sm d-flex align-items-center justify-content-end">
