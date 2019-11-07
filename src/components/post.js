@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom'
 import '../css/uploadStatus.css'
 import { _createPost } from '../actions/post'
 import { connect } from 'react-redux';
+
 
 class Post_Layout extends Component {
 
     state = {
         image: null,
         content: '',
-        hashtag: ''
+        hashtag: '',
     }
-
     _onChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
@@ -105,15 +105,24 @@ class Post_Layout extends Component {
                                             <div className="wrap">
                                                 <Link to='/#'>
                                                     <div
-                                                    style={{height:'50'}}
-                                                     className="badge badge-pill badge-info">#{item.hashtag}</div>
+                                                        style={{ height: '50' }}
+                                                        className="badge badge-pill badge-info">#{item.hashtag}</div>
                                                 </Link>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div className="col-sm d-flex align-items-center justify-content-end">
-                                        <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
+                                        {/* <Router>
+                                            <Switch>
+                                                
+                                            </Switch>
+                                            <div>
+                                                {this.renderRedirect()}
+                                                <button onClick={this.setRedirect}>Redirect</button>
+                                            </div>
+                                        </Router> */}
+                                        <Link to="/edit-post"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
                                     </div>
                                 </div>
                                 <div
