@@ -43,6 +43,9 @@ class Home extends Component {
     }
 
     render() {
+        // let {match}=this.props;
+        // console.log({match:{params}});
+        
         const photoURL = this.props.user.infoUser.url
             ? `https://socialnetwork113.herokuapp.com/get_avatar/${this.props.user.infoUser.url}`
             : `https://socialnetwork113.herokuapp.com/get_avatar/default.png`

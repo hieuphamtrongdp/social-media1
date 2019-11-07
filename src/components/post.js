@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+
+import { Route, Link } from "react-router-dom";
 import '../css/uploadStatus.css'
-import { _createPost } from '../actions/post'
+import { _createPost } from '../actions/user'
 import { connect } from 'react-redux';
+import { styles, red, hidden } from "ansi-colors";
+import { _deletePost } from '../actions/user'
+
 
 class Post_Layout extends Component {
 
@@ -42,7 +47,23 @@ class Post_Layout extends Component {
             image: e.target.files[0]
         })
     }
+
+    _handleDeletePost = (_idPost) => {
+
+
+        const { _deletePost } = this.props;
+        _deletePost(_idPost)
+    }
+
     render() {
+        // let uirGetImageLocal= 'http://localhost:3000/get_avatar/';
+        let uirGetImageHeroku = 'https://socialnetwork113.herokuapp.com/get_avatar/'
+        let { path } = this.props
+        console.log({ path });
+
+
+
+
         return (
             <>
                 <div className="card shadow-sm rounded">
@@ -90,123 +111,124 @@ class Post_Layout extends Component {
                         </div>
                     </div>
                 </div>
-                {
+                {/* Hiện bài post vừa mới đăng */}
+                {/* {
                     this.props.post.listInfoPost.length > 0 &&
                     this.props.post.listInfoPost.map(item => {
                         return (
-                            <div className="card shadow-sm">
-                                <div className="row">
-                                    <div className="col-sm">
-                                        <div className="row">
-                                            <div className="avatar d-flex alignItemsCenter">
-                                                <span>Avatar</span>
+                            <div>
+                                <div className="card shadow-sm">
+                                    <div className="row">
+                                        <div className="col-sm">
+                                            <div className="row">
+                                                <div style={{ width: 50, height: 50 }} className=" avatar d-flex alignItemsCenter">
+                                                    <img style={{ width: 50, height: 'auto' }} src={`${uirGetImageHeroku}${item.author.avatar}`} alt="" />
+                                                </div>
+                                                <Link className="status-editing">{item.author.fullname}</Link>
+
                                             </div>
-                                            <Link className="status-editing">{item.author}</Link>
                                             <div className="wrap">
                                                 <Link to='/#'>
                                                     <div
-                                                    style={{height:'50'}}
-                                                     className="badge badge-pill badge-info">#{item.hashtag}</div>
+                                                        style={{ height: '50' }}
+                                                        className="badge badge-pill badge-info">#{item.hashtag}</div>
                                                 </Link>
                                             </div>
-                                            
+                                        </div>
+                                        <div className="col-sm d-flex align-items-center justify-content-end">
+                                            <Link to={`/edit-post/${item._id}`}><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
+                                            <button onClick={() => this._handleDeletePost(item._id)} className="status-button" style={{ margin: "0" }}>Delte post</button>
                                         </div>
                                     </div>
-                                    <div className="col-sm d-flex align-items-center justify-content-end">
-                                        <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
-                                    </div>
-                                </div>
-                                <div
-                                    className="wrap-content">
-                                    <span className="content">{item.content}</span>
                                     <div
-                                        className="palette">
-                                        <img
-                                            style={{ maxWidth: '100%' }}
-                                            src={`http://localhost:3000/get_avatar/${item.images[0]}`} />
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-sm d-flex justify-content-center">
-                                            <button className="fas fa-heart status-button"></button>
+                                        className="wrap-content">
+                                        <span className="content">{item.content}</span>
+                                        <div
+                                            className="palette">
+                                            <img
+                                                style={{ maxWidth: '100%' }}
+                                                src={`http://localhost:3000/get_avatar/${item.images[0]}`} />
                                         </div>
-                                        <div className="col-sm d-flex justify-content-center">
-                                            <button className="fas status-button">Bình luận</button>
+                                        <div className="row">
+                                            <div className="col-sm d-flex justify-content-center">
+                                                <button className="fas fa-heart status-button"></button>
+                                            </div>
+                                            <div className="col-sm d-flex justify-content-center">
+                                                <button className="fas status-button">Bình luận</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                        )
+                    })
+                } */}
+                {/* Hien tat ca bai dang */}
+
+                {
+                    this.props.user.listPosts.length > 0 &&
+                    this.props.user.listPosts.map(item => {
+                        return (
+                            <div>
+                                <div className="card shadow-sm">
+                                    <div className="row">
+                                        <div className="col-sm">
+                                            <div className="row">
+                                                <div style={{ width: 50, height: 50 }} className=" avatar d-flex alignItemsCenter">
+                                                    <img style={{ width: 50, height: 'auto' }} src={`${uirGetImageHeroku}${item.author.avatar}`} alt="" />
+                                                </div>
+                                                <Link className="status-editing">{item.author.fullname}</Link>
+
+                                            </div>
+                                            <div className="wrap">
+                                                <Link to='/#'>
+                                                    <div
+                                                        style={{ height: '50' }}
+                                                        className="badge badge-pill badge-info">#{item.hashtag}</div>
+                                                </Link>
+
+                                            </div>
+                                        </div>
+                                        <div className="col-sm d-flex align-items-center justify-content-end">
+                                            {
+                                                this.props.user.username.usernameServer == item.author.username &&
+
+                                                <>
+                                                    <Link to={`/edit-post/${item._id}`}><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
+                                                    <button onClick={() => this._handleDeletePost(item._id)} className="status-button" style={{ margin: "0" }}>Delte post</button>
+                                                </>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="wrap-content">
+                                        <span className="content">{item.content}</span>
+                                        <div
+                                            className="palette">
+                                            <img
+                                                style={{ maxWidth: '100%' }}
+                                                src={`http://localhost:3000/get_avatar/${item.images[0]}`} />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-sm d-flex justify-content-center">
+                                                <button className="fas fa-heart status-button"></button>
+                                            </div>
+                                            <div className="col-sm d-flex justify-content-center">
+                                                <button className="fas status-button">Bình luận</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         )
 
                     })
-
                 }
-                {/* {   
-                    this.props.post.infoPost == null &&
-                    <div className="card shadow-sm">
-                        <div className="row">
-                            <div className="col-sm">
-                                <div className="row">
-                                    <div className="avatar d-flex alignItemsCenter">
-                                        <span>Avatar</span>
-                                    </div>
-                                    <Link className="status-editing">{this.props.post.infoPost.author}</Link>
-                                </div>
-                            </div>
-                            <div className="col-sm d-flex align-items-center justify-content-end">
-                                <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
-                            </div>
-                        </div>
-                        <div
-                        className="wrap-content">
-                            <span className="content">{this.props.post.infoPost.content}</span>
-                            <div
-                            className="palette">
-                                <img
-                                    style={{ maxWidth: '100%' }}
-                                    src={`http://localhost:3000/get_avatar/${this.props.post.infoPost.image}`} />
-                            </div>
-                            <div className="row">
-                                <div className="col-sm d-flex justify-content-center">
-                                    <button className="fas fa-heart status-button"></button>
-                                </div>
-                                <div className="col-sm d-flex justify-content-center">
-                                    <button className="fas status-button">Bình luận</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                } */}
-                {/* <div className="card shadow-sm">
-                    <div className="row">
-                        <div className="col-sm">
-                            <div className="row">
-                                <div className="avatar d-flex alignItemsCenter">
-                                    <span>Avatar</span>
-                                </div>
-                                <Link className="status-editing">{this.props.post.infoPost.author}</Link>
-                            </div>
-                        </div>
-                        <div className="col-sm d-flex align-items-center justify-content-end">
-                            <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
-                        </div>
-                    </div>
-                    <div className="wrap-content">
-                        <span className="content">{this.props.post.infoPost.content}</span>
-                        <div className="palette">
-                            <img
-                            style={{maxWidth:'100%'}}
-                            src={`http://localhost:3000/get_avatar/${this.props.post.infoPost.image}`} />
-                        </div>
-                        <div className="row">
-                            <div className="col-sm d-flex justify-content-center">
-                                <button className="fas fa-heart status-button"></button>
-                            </div>
-                            <div className="col-sm d-flex justify-content-center">
-                                <button className="fas status-button">Bình luận</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+
             </>
         )
     }
@@ -218,4 +240,5 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, { _createPost })(Post_Layout)
+export default connect(mapStateToProps, { _createPost, _deletePost })(Post_Layout)
+// _createPost

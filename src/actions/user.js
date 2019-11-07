@@ -13,22 +13,25 @@ export const _login = (usernameLogin, passwordLogin, history) => {
 
             if (resp.data.text == 'login_success') {
                 const { data: { data: dataResult } } = resp;
-                let { username: usernameServer, token, fullname, email, birthday, phone, avatar } = dataResult;
+                let { username: usernameServer, token, fullname, email, birthday, phone, avatar, listPosts } = dataResult;
                 let username = { usernameServer, fullname, email };
                 let infoUser = { birthday, phone, url: avatar }
-                console.log(infoUser);
+                let listPostsServerSend = listPosts
+
+
+
 
                 dispatch({
                     type: 'LOGIN_SUCCESSED',
                     payload: {
-                        username, token, infoUser
+                        username, token, infoUser, listPostsServerSend
                     }
                 })
                 localStorage.setItem('token', token);
                 return history.push('/');
             }
             if (resp.data.text == 'login_fail') {
-                console.log(resp.data.errors);
+
                 dispatch({
                     type: 'LOGIN_FAIL',
                     payload: {
@@ -83,13 +86,14 @@ export const _refreshPage = history => {
             token
         }).then(resp => {
             const { data: { data: dataResult } } = resp;
-            let { username: usernameServer, token, fullname, email, birthday, phone, avatar } = dataResult;
+            let { username: usernameServer, token, fullname, email, birthday, phone, avatar, listPosts } = dataResult;
             let username = { usernameServer, fullname, email };
-            let infoUser = { birthday, phone, url:avatar };
+            let infoUser = { birthday, phone, url: avatar };
+            let listPostsServerSend = listPosts
             STORE.dispatch({
                 type: 'UPDATE_USER_REFRESH_SUCCESSED',
                 payload: {
-                    username, token, infoUser
+                    username, token, infoUser, listPostsServerSend
                 }
             });
 
@@ -135,30 +139,30 @@ export const _updateAvatar = (avatar) => {
     let token = localStorage.getItem('token');
     return dispatch => {
         // console.log(avatar);
-        
+
         let formData = new FormData();
         formData.append('avatar', avatar);
-        formData.append('token',token)
-        
+        formData.append('token', token)
+
         const config = {
             headers: {
-                'accept':'application/json',
-                 'content-type': 'multipart/form-data' 
-                }
+                'accept': 'application/json',
+                'content-type': 'multipart/form-data'
+            }
         };
 
-        Axios.post(`${UIR_ORIGIN}/update_avatar`, formData,config)
-        .then(resp => {
-            
-            let urlImage= resp.data;
-            
-            dispatch({
-                type : 'UPDATE_AVATAR_SUCCESS',
-                payload:{
-                    url: urlImage
-                } 
+        Axios.post(`${UIR_ORIGIN}/update_avatar`, formData, config)
+            .then(resp => {
+
+                let urlImage = resp.data;
+
+                dispatch({
+                    type: 'UPDATE_AVATAR_SUCCESS',
+                    payload: {
+                        url: urlImage
+                    }
+                })
             })
-        })
 
 
         // Axios.post(`${UIR_ORIGIN}/update_avatar`, data, {
@@ -197,4 +201,83 @@ export const _updateInfo = (birthday, phone, history) => {
             }
         })
     }
+}
+
+export const _editPost = (_idPost, content, hashtag) => {
+    let token = localStorage.getItem('token');
+    return dispatch => {
+        Axios.put(`${UIR_ORIGIN}/posts/${token}`, {
+            _idPost, content, hashtag
+        }).then(resp => {
+            console.log(resp.data)
+            let listPostsServerSend = resp.data
+            dispatch({
+                type: 'EDIT_POST_DONE',
+                payload: {
+                    listPostsServerSend
+                }
+            })
+
+        })
+    }
+
+}
+
+export const _createPost = (image, content, hashtag) => {
+    let token = localStorage.getItem('token');
+    return dispatch => {
+        let data = { content, hashtag }
+        let formData = new FormData();
+        formData.append('imagePost', image);
+        formData.append('token', token)
+        formData.append('content', content)
+        formData.append('hashtag', hashtag)
+
+        const config = {
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        Axios.post(`${UIR_ORIGIN}/posts`, formData, config)
+            .then(resp => {
+                let listPostsServerSend = resp.data
+                
+
+
+                dispatch({
+                    type: 'ADD_POST_SUCCESS',
+                    payload:{
+                        listPostsServerSend
+                    }
+                })
+            })
+    }
+}
+
+export const _deletePost = (_idPost) => {
+    let tokenStorage = localStorage.getItem('token');
+
+    console.log(_idPost);
+    return dispatch => {
+        Axios.delete(`${UIR_ORIGIN}/posts/${_idPost}`, {
+
+        }).then(resp => {
+            let listPostsServerSend = resp.data
+            dispatch({
+                type: 'DELETE_DONE',
+                payload: {
+                    listPostsServerSend
+                }
+            })
+        })
+
+    }
+
+    // return dispatch=>{
+    //     Axios.delete(`${UIR_ORIGIN}/posts/${token}`,{
+    //         _idPost
+    //     })
+    // }
 }
