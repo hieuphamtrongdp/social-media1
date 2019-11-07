@@ -1,9 +1,47 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import '../css/uploadStatus.css'
+import { _createPost } from '../actions/post'
+import { connect } from 'react-redux';
 
 class Post_Layout extends Component {
 
+    state = {
+        image: null,
+        content: '',
+        hashtag: ''
+    }
+
+    _onChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+        // console.log(e.target.id);
+
+
+    }
+
+    _handleSubmit = () => {
+        // console.log(this.state.image);
+        // console.log(this.state.content);
+        // console.log(this.state);
+        let image = this.state.image;
+        let content = this.state.content;
+        let hashtag = this.state.hashtag
+
+
+        const { _createPost } = this.props
+        _createPost(image, content, hashtag)
+
+
+
+    }
+
+    _handleChangeFile = e => {
+        this.setState({
+            image: e.target.files[0]
+        })
+    }
     render() {
         return (
             <>
@@ -20,7 +58,11 @@ class Post_Layout extends Component {
                             <div className="d-flex flex-row tab-pane fade show active ">
                                 <div className="avatar">avatar</div>
                                 <div className="form-group">
-                                    <textarea className="form-control" rows="4" placeholder="Bạn đang nghĩ gì?"></textarea>
+                                    <textarea
+                                        onChange={this._onChange}
+                                        value={this.state.content}
+                                        id="content"
+                                        className="form-control" rows="4" placeholder="Bạn đang nghĩ gì?"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -29,8 +71,15 @@ class Post_Layout extends Component {
                         <div className="row">
                             <div className="col-sm">
                                 <div className="d-flex flex-row">
-                                    <button type="button" className="fas fa-image status-button" title="Chọn ảnh">Ảnh/Images</button>
-                                    <input type="text" class="form-control status-input" placeholder="#Hashtags" />
+                                    <button onClick={() => { this.upload.click() }} type="button" className="fas fa-image status-button" title="Chọn ảnh">Ảnh/Images</button>
+                                    <input ref={(ref) => this.upload = ref} style={{ display: "none" }} type="file" name="avatar" id="avatar"
+                                        onChange={e => this._handleChangeFile(e)}
+                                    />
+                                    <input
+                                        onChange={this._onChange}
+                                        value={this.state.hashtag}
+                                        id="hashtag"
+                                        type="text" class="form-control status-input" placeholder="#Hashtags" />
                                 </div>
                             </div>
                             <div className="col-sm">
@@ -41,14 +90,92 @@ class Post_Layout extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="card shadow-sm">
+                {
+                    this.props.post.listInfoPost.length > 0 &&
+                    this.props.post.listInfoPost.map(item => {
+                        return (
+                            <div className="card shadow-sm">
+                                <div className="row">
+                                    <div className="col-sm">
+                                        <div className="row">
+                                            <div className="avatar d-flex alignItemsCenter">
+                                                <span>Avatar</span>
+                                            </div>
+                                            <Link className="status-editing">{item.author}</Link>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm d-flex align-items-center justify-content-end">
+                                        <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
+                                    </div>
+                                </div>
+                                <div
+                                    className="wrap-content">
+                                    <span className="content">{item.content}</span>
+                                    <div
+                                        className="palette">
+                                        <img
+                                            style={{ maxWidth: '100%' }}
+                                            src={`http://localhost:3000/get_avatar/${item.images[0]}`} />
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm d-flex justify-content-center">
+                                            <button className="fas fa-heart status-button"></button>
+                                        </div>
+                                        <div className="col-sm d-flex justify-content-center">
+                                            <button className="fas status-button">Bình luận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+
+                    })
+
+                }
+                {/* {   
+                    this.props.post.infoPost == null &&
+                    <div className="card shadow-sm">
+                        <div className="row">
+                            <div className="col-sm">
+                                <div className="row">
+                                    <div className="avatar d-flex alignItemsCenter">
+                                        <span>Avatar</span>
+                                    </div>
+                                    <Link className="status-editing">{this.props.post.infoPost.author}</Link>
+                                </div>
+                            </div>
+                            <div className="col-sm d-flex align-items-center justify-content-end">
+                                <Link to="/#"><button className="status-button" style={{ margin: "0" }}>Edit post</button></Link>
+                            </div>
+                        </div>
+                        <div
+                        className="wrap-content">
+                            <span className="content">{this.props.post.infoPost.content}</span>
+                            <div
+                            className="palette">
+                                <img
+                                    style={{ maxWidth: '100%' }}
+                                    src={`http://localhost:3000/get_avatar/${this.props.post.infoPost.image}`} />
+                            </div>
+                            <div className="row">
+                                <div className="col-sm d-flex justify-content-center">
+                                    <button className="fas fa-heart status-button"></button>
+                                </div>
+                                <div className="col-sm d-flex justify-content-center">
+                                    <button className="fas status-button">Bình luận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                } */}
+                {/* <div className="card shadow-sm">
                     <div className="row">
                         <div className="col-sm">
                             <div className="row">
                                 <div className="avatar d-flex alignItemsCenter">
                                     <span>Avatar</span>
                                 </div>
-                                <Link className="status-editing">Còn đây là tên</Link>
+                                <Link className="status-editing">{this.props.post.infoPost.author}</Link>
                             </div>
                         </div>
                         <div className="col-sm d-flex align-items-center justify-content-end">
@@ -56,12 +183,11 @@ class Post_Layout extends Component {
                         </div>
                     </div>
                     <div className="wrap-content">
-                        <span className="content">Hello World!!!</span>
+                        <span className="content">{this.props.post.infoPost.content}</span>
                         <div className="palette">
-                            <div className="first"></div>
-                            <div className="second"></div>
-                            <div className="third"></div>
-                            <div className="fourth"></div>
+                            <img
+                            style={{maxWidth:'100%'}}
+                            src={`http://localhost:3000/get_avatar/${this.props.post.infoPost.image}`} />
                         </div>
                         <div className="row">
                             <div className="col-sm d-flex justify-content-center">
@@ -72,9 +198,16 @@ class Post_Layout extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </>
         )
     }
 }
-export default Post_Layout;
+
+const mapStateToProps = state => ({
+    user: state.user,
+    post: state.post
+
+});
+
+export default connect(mapStateToProps, { _createPost })(Post_Layout)

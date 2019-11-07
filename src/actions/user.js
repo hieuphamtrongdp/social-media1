@@ -2,8 +2,8 @@ import Axios from 'axios';
 import STORE from '../stores';
 
 
-let UIR_ORIGIN = `https://socialnetwork113.herokuapp.com`;
-// let UIR_ORIGIN = `http://localhost:3000`;
+// let UIR_ORIGIN = `https://socialnetwork113.herokuapp.com`;
+let UIR_ORIGIN = `http://localhost:3000`;
 
 export const _login = (usernameLogin, passwordLogin, history) => {
     return dispatch => { //tự động map khi gọi hàm connect trong component
