@@ -11,13 +11,15 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: brown;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 15px;
     color: white;
 }
+
+
 .card {
     text-align: center;
     margin: 0;
@@ -42,7 +44,7 @@
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    background: brown;
+    
     margin-top: 10px;
     margin-right: 10px;
     color: #FFF
@@ -54,12 +56,14 @@
     font-weight: bold;
 }
 .wrap-content {
+    margin-top: 10px;
     margin-bottom: 5px;
 }
 .wrap-content .row {
     margin: 0;
 }
 .wrap-content .row button {
+    margin-top: 10px;
     padding: 0 20px;
     display: flex;
     justify-content: center;
@@ -67,8 +71,9 @@
 .wrap-content span.content{
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 45px;
+    /* justify-content: center; */
+    padding-left: 20px;
+    font-size: 20px;
 }
 .palete {
     margin: 50 15;
@@ -128,7 +133,7 @@
 }
 .row {
     margin: 0;
-    margin-bottom: 10px;
+    
 }
 .container-fluid {
   margin-top: 10px;

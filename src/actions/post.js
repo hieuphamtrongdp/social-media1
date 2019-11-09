@@ -35,3 +35,4 @@ export const _createPost = (image, content, hashtag) => {
         })
     }
 }
+

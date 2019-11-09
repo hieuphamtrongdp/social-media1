@@ -21,6 +21,8 @@ import Update_Info from './components/update_info';
 import Update_Avatar from './components/update_avatar';
 import Home from './components/Home';
 import editPost from './components/editPost';
+import {Route} from 'react-router'
+
 // Import ReactTrap
 
 
@@ -36,7 +38,8 @@ function App(){
       <ProtectedRoute path={'/update_avatar'} component={Update_Avatar} />
       <ProtectedRoute path={'/update_info'} component={Update_Info} />
       <ProtectedRoute exact path={'/'} component={Home} />
-      <ProtectedRoute exact path={'/edit-post'} component={editPost}/>
+      <PublicRoute  path={'/edit-post/:id'} component={editPost}/>
+      {/* <Route path='/edit-post/:id' exact component={editPost} /> */}
     </>
   );
 }

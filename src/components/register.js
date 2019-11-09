@@ -41,8 +41,8 @@ class Register extends Component {
 
         axios({
             method: 'post',
-            // url: 'http://localhost:3000/register',
-            url: 'https://socialnetwork113.herokuapp.com/register',
+            url: 'http://localhost:3000/register',
+            // url: 'https://socialnetwork113.herokuapp.com/register',
             data: newUser
         })
             .then(response => {
