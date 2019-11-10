@@ -96,6 +96,12 @@ class Overview extends Component {
                                     <strong>Update Password</strong>
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/user-profile">
+                                    <i className="fas fa-user"/>
+                                    <strong>Cá nhân</strong>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 

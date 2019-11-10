@@ -166,7 +166,7 @@ class Post_Layout extends Component {
                 } */}
                 {/* Hien tat ca bai dang */}
 
-                {/* {
+                {
                     this.props.user.listPosts.length > 0 &&
                     this.props.user.listPosts.map(item => {
                         return (
@@ -227,7 +227,7 @@ class Post_Layout extends Component {
                         )
 
                     })
-                } */}
+                }
 
             </>
         )

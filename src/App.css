@@ -1,0 +1,96 @@
+#root {
+    min-height: 100%;
+    height: 100%;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+div {
+    display: block;
+}
+body {
+    margin: 0;
+    font-family: SF Pro Text,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #1a1a1a;
+    text-align: left;
+    background-color: #f2f2f2;
+}
+header {
+    z-index: 99;
+    padding: 0 16px;
+    min-width: 0;
+    background-color: #fff;
+    box-shadow: inset 0 -1px 0 #ececec;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+.ul-style {
+    padding-left: 40px;
+}
+
+.header-brand {
+    padding: 1.125rem 0 .625rem;
+}
+img, svg {
+    vertical-align: middle;
+}
+img {
+    border-style: none;
+}
+.vertical-line-nav {
+    width: 1px; height: 34px; background-color: rgb(238, 238, 238);
+}
+.header-nav--main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.list-unstyled {
+    margin-bottom: 0;
+}
+.list-inline, .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+dl, ol, ul {
+    margin-top: 0;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.header-nav>li:not(.header-nav-item-button)>a.active:after {
+    background-color: #6fbe44;
+}
+
+.fas.active {
+    color: #9fffed;
+}
+.header-nav--main .fas {
+    font-size: large;
+}
+.header-nav>li:not(.header-nav-item-button)>a {
+    padding: 1rem 1.75rem;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    color: #4d4d4d;
+}
