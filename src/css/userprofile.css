@@ -2,11 +2,14 @@
     box-sizing: border-box;
 }
 .card {
-    width: 710.069px;
-    height: 350px;
+    height: fit-content;
+    background-color: #fff;
+}
+.card-user-profile {
+    display: flex;
 }
 .head-cover {
-    height: 16.25rem;
+    height: 15rem;
     background-color: #f2f2f2;
     background-repeat: no-repeat;
     background-size: cover;
@@ -91,4 +94,43 @@ li {
     flex-wrap: wrap;
     margin-right: -.375rem;
     margin-left: -.375rem;
+}
+a:hover {
+    text-decoration: none;
+}
+.user-profile-friend{
+    position: absolute;
+    top: 380px;
+    background: none;
+    width: 100%;
+    max-width: 637px;
+}
+.box{
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(26,26,26,.05);
+    padding: .75rem;
+    background-color: #fff;
+}
+.web-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.pending-request{
+    position: relative;
+}
+.friend-button{
+    margin: 0 15px;
+    padding: .15rem .75rem;
+    border-radius: 15px;
+}
+.friend-button span {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: .5rem;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.rounded.bg-white.w100 .d-flex{
+    margin-bottom: 10px;
 }

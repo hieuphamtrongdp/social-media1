@@ -31,16 +31,13 @@ class Overview extends Component {
     render() {
         const photoURL = this.props.user.infoUser.url
             ? `https://socialnetwork113.herokuapp.com/get_avatar/${this.props.user.infoUser.url}`
-            : `https://socialnetwork113.herokuapp.com/get_avatar/default.png`
+            : `https://i.imgur.com/xedRnbw.png`
         return (
             <>
                 
                 <div className="profile-sidebar shadow-sm rounded">
-
-             <div className="profile-userpic">
-
-                        <img src={photoURL} className="img-fluid shadow-sm circle" onClick={() => { this.upload.click() }} alt="" />
-
+                    <div className="head-avatar rounded-circle" style={{position:"relative"}}>
+                        <img className="avatar" src={photoURL} alt="avatar" />
                     </div>
 
                     <input ref={(ref) => this.upload = ref} style={{ display: "none" }} type="file" name="avatar" id="avatar"
@@ -58,8 +55,8 @@ class Overview extends Component {
                     </div>
 
                     <div className="profile-userbuttons">
-                        <button className="btn btn-danger btn-sm" style={{ backgroundColor: "#D9534F" }} onClick={e => this._handleSubmit(e)} name="submit"    type="button" >Change Avatar</button>
-                        <button className="btn btn-danger btn-sm" style={{ backgroundColor: "#5cb85c" }} type="button" >Message</button>
+                        <button className="btn" style={{ backgroundColor: "#D9534F", color:"white" }} onClick={e => this._handleSubmit(e)} name="submit" type="button" >Change Avatar</button>
+                        <button className="btn" style={{ backgroundColor: "#5cb85c", color:"white" }} type="button" >Message</button>
                     </div>
 
                     <div className="profile-usermenu">
@@ -67,20 +64,20 @@ class Overview extends Component {
                             <li className="active">
                                 <Link>
                                     <i className="fas fa-home" />
-                                    Overview
+                                    <strong>Overview</strong>
                                 </Link>
                             </li>
                             <li>
                                 <Link>
                                     <i className="fas fa-mobile-alt disabled" />
-                                    {this.props.user.infoUser.phone}
+                                    <strong>{this.props.user.infoUser.phone}</strong>
                                 </Link>
 
                             </li>
                             <li>
                                 <Link>
                                     <i className="far fa-heart disabled" />
-                                    {this.props.user.infoUser.birthday}
+                                    <strong>{this.props.user.infoUser.birthday}</strong>
                                 </Link>
                             </li>
 
@@ -98,7 +95,7 @@ class Overview extends Component {
                             </li>
                             <li>
                                 <Link to="/user-profile">
-                                    <i className="fas fa-user"/>
+                                    <i className="fas fa-user" />
                                     <strong>Cá nhân</strong>
                                 </Link>
                             </li>

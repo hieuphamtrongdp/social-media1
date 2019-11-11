@@ -12,6 +12,7 @@ import { FormControl } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import Post_Layout from '../components/post'
 import Overview from '../components/Overview'
+import NavBar from '../components/Navbar'
 
 class Home extends Component {
 
@@ -45,7 +46,7 @@ class Home extends Component {
     render() {
         // let {match}=this.props;
         // console.log({match:{params}});
-        
+
         const photoURL = this.props.user.infoUser.url
             ? `https://socialnetwork113.herokuapp.com/get_avatar/${this.props.user.infoUser.url}`
             : `https://socialnetwork113.herokuapp.com/get_avatar/default.png`
@@ -55,30 +56,31 @@ class Home extends Component {
         return (
             <div>
 
-                <div className="header__content">
-                    <nav className="ul-style">
-                        <ul >
-                            <li className="active"><a href="#">Trang chủ</a></li>
-                            <li><a href="#">Lời mời kết bạn</a></li>
-                            <li><a href="#">Tin nhắn</a></li>
-                            <li><a href="#">Thông báo</a></li>
-                            <li><a href="#">Cài đặt</a></li>
-                            <li><button className="btn btn-default btn_logout" onClick={() => this._handleLogout()}>Đăng xuất</button></li>
+                <NavBar />
 
-
-                        </ul>
-                        <div style={{ float: "right", marginRight: "20px" }}>
-                            <input id="search-user" placeholder="search" type="text" />
-                            <button className="btn btn-primary" type="submit">Search</button>
+                <div className="main-theme row">
+                    <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-aside">
+                        <div className="aside-wrapper shadow-sm">
+                            <Overview />
                         </div>
-
-                    </nav>
+                    </div>
+                    <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <div className="row justify-content-center">
+                                <Post_Layout />
+                        </div>
+                    </div>
+                    <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-aside">
+                        <div className="aside-wrapper">
+                            <div className="profile-content">
+                                abcxyz.Shiet, put something here
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
 
-
-                <div className="container-fluid">
+                {/* <div className="main-theme row">
                     <div className="row profile">
                         <div className="col-md-3">
                             <Overview/>
@@ -96,7 +98,7 @@ class Home extends Component {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
 
             </div>
 
@@ -108,8 +110,5 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
     user: state.user
-
-
-
 });
 export default connect(mapStateToProps, { _logout, _updateAvatar })(Home);

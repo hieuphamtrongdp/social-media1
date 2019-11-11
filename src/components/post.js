@@ -5,7 +5,6 @@ import { Route, Link } from "react-router-dom";
 import '../css/uploadStatus.css'
 import { _createPost } from '../actions/user'
 import { connect } from 'react-redux';
-import { styles, red, hidden } from "ansi-colors";
 import { _deletePost } from '../actions/user'
 
 
@@ -60,10 +59,6 @@ class Post_Layout extends Component {
         let uirGetImageHeroku = 'https://socialnetwork113.herokuapp.com/get_avatar/'
         let { path } = this.props
         console.log({ path });
-
-
-
-
         return (
             <>
                 <div className="card shadow-sm rounded">
@@ -74,42 +69,45 @@ class Post_Layout extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className="card-body">
-                        <div className="tab-content">
-                            <div className="d-flex flex-row tab-pane fade show active ">
-                                <div className="avatar">avatar</div>
-                                <div className="form-group">
-                                    <textarea
-                                        onChange={this._onChange}
-                                        value={this.state.content}
-                                        id="content"
-                                        className="form-control" rows="4" placeholder="Bạn đang nghĩ gì?"></textarea>
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="tab-content">
+                                <div className="d-flex flex-row tab-pane fade show active ">
+                                    <div className="avatar">avatar</div>
+                                    <div className="form-group">
+                                        <textarea
+                                            onChange={this._onChange}
+                                            value={this.state.content}
+                                            id="content"
+                                            className="form-control" rows="4" cols="100" placeholder="Bạn đang nghĩ gì?"></textarea>
+                                    </div>
+                                </div>
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-sm">
+                                            <div className="d-flex flex-row">
+                                                <button onClick={() => { this.upload.click() }} type="button" className="fas fa-image status-button" title="Chọn ảnh">Ảnh/Images</button>
+                                                <input ref={(ref) => this.upload = ref} style={{ display: "none" }} type="file" name="avatar" id="avatar"
+                                                    onChange={e => this._handleChangeFile(e)}
+                                                />
+                                                <input
+                                                    onChange={this._onChange}
+                                                    value={this.state.hashtag}
+                                                    id="hashtag"
+                                                    type="text" class="form-control status-input" placeholder="#Hashtags" />
+                                            </div>
+                                        </div>
+                                        <div className="col-sm">
+                                            <div className="d-flex flex-row-reverse">
+                                                <button className="btn btn-danger btn-sm" style={{ backgroundColor: "#26A69A", border:"none" }} onClick={e => this._handleSubmit(e)} name="submit" type="button" >Đăng</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm">
-                                <div className="d-flex flex-row">
-                                    <button onClick={() => { this.upload.click() }} type="button" className="fas fa-image status-button" title="Chọn ảnh">Ảnh/Images</button>
-                                    <input ref={(ref) => this.upload = ref} style={{ display: "none" }} type="file" name="avatar" id="avatar"
-                                        onChange={e => this._handleChangeFile(e)}
-                                    />
-                                    <input
-                                        onChange={this._onChange}
-                                        value={this.state.hashtag}
-                                        id="hashtag"
-                                        type="text" class="form-control status-input" placeholder="#Hashtags" />
-                                </div>
-                            </div>
-                            <div className="col-sm">
-                                <div className="d-flex flex-row-reverse">
-                                    <button className="btn btn-danger btn-sm" style={{ backgroundColor: "#26A69A" }} onClick={e => this._handleSubmit(e)} name="submit" type="button" >Đăng</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 {/* Hiện bài post vừa mới đăng */}
                 {/* {
@@ -171,7 +169,7 @@ class Post_Layout extends Component {
                     this.props.user.listPosts.map(item => {
                         return (
                             <div>
-                                <div className="card shadow-sm">
+                                <div className="card card-post shadow-sm">
                                     <div className="row">
                                         <div className="col-sm">
                                             <div className="row">
